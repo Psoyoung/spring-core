@@ -1,5 +1,9 @@
 package hello.core.lifecycle;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+//javax는 자바진영에서 공식적으로 지원하는 것
+//결론 : 빈 생명주기 콜백은 @PostConstruct, @PreDestroy 사용하면됨
 public class NetworkClient{
 
     private String url;
@@ -26,12 +30,14 @@ public class NetworkClient{
         System.out.println("close : " + url);
     }
 
+    @PostConstruct
     public void init(){
         System.out.println("init");
         connect();
         call("초기화 연결 메시지");
     }
 
+    @PreDestroy
     public void close(){
         System.out.println("close");
         disconnect();
